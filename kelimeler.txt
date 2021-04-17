@@ -1,1 +1,3 @@
 3lts = アリカト
+bxejr = コサイマス 
+arikato gozaimasu = アリカト コサイマト
