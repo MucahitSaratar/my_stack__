@@ -22,7 +22,7 @@ def hook_code(mu, address, size, user_data):
     print("------------------------------------------------")
 
 
-def forceCrash(error):
+def forceCrash(uc_error):
     mem_errors = [
             UC_ERR_READ_UNMAPPED, UC_ERR_READ_PROT, UC_ERR_READ_UNALIGNED,
             UC_ERR_WRITE_UNMAPPED, UC_ERR_WRITE_PROT, UC_ERR_WRITE_UNALIGNED,
@@ -40,8 +40,8 @@ def forceCrash(error):
 
 
 ## Functions 
-startaddress = 0x001e6d38
-stopaddress = 0x001e6da4
+startaddress = 
+stopaddress = 
 
 
 binbase = 0x0
